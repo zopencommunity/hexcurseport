@@ -1,0 +1,27 @@
+diff --git a/src/screen.c b/src/screen.c
+index 20f8068..7cc3a79 100644
+--- a/src/screen.c
++++ b/src/screen.c
+@@ -145,14 +145,14 @@ void init_fkeys()
+ {
+     if (FNUMBERS)
+     {
+-        slk_set(1, "1:Help", 1);			/* init menu tabs     */
+-        slk_set(2, "2:Save", 1);
+-        slk_set(3, "3:Open", 1);
+-        slk_set(4, "4:Goto", 1);
+-        slk_set(5, "5:Find", 1);
+-        slk_set(6, (printHex) ? "6:Hex Ad":"6:Dec Ad", 1);
+-        slk_set(7, "7:Hex Ed", 1);
+-        slk_set(8, "8:Quit", 1);
++        slk_set(1, "F1:Help", 1);			/* init menu tabs     */
++        slk_set(2, "F2:Save", 1);
++        slk_set(3, "F3:Open", 1);
++        slk_set(4, "F4:Goto", 1);
++        slk_set(5, "F5:Find", 1);
++        slk_set(6, (printHex) ? "F6:Hex Ad":"F6:Dec Ad", 1);
++        slk_set(7, "F7:Hex Ed", 1);
++        slk_set(8, "F8:Quit", 1);
+     }
+     else
+     {
