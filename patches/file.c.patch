@@ -1,0 +1,37 @@
+diff --git a/src/file.c b/src/file.c
+index 1f569c1..0bdc6fa 100644
+--- a/src/file.c
++++ b/src/file.c
+@@ -17,6 +17,7 @@
+  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA *
+  *									      *
+ \******************************************************************************/
++#include "zos.h"
+ #include "hex.h"
+ 
+ /*******************************************************\
+@@ -382,8 +383,12 @@ off_t hexSearchBM(WINDOW *w, FILE *fp, int pat[], off_t startfp, int patlen)
+     off_t       pos_max = -1;   // EOF position
+     off_t       rv = -1;        // return value: default = -1
+ 
++#ifdef __MVS__
++  buf =(char*) __aligned_malloc(BUF_L, getpagesize());
++#else
+     if (posix_memalign((void **)&buf, getpagesize(), BUF_L) != 0)
+         return -1;
++#endif
+ 
+     if (! (delta2 && patt)) return -1;
+ 
+@@ -456,7 +461,11 @@ off_t hexSearchBM(WINDOW *w, FILE *fp, int pat[], off_t startfp, int patlen)
+     end:
+         // set back to blocking
+         wtimeout(w, -1);
++#ifndef __MVS__
+         free(buf);
++#else
++        __aligned_free(buf);
++#endif
+         free(patt);
+         free(delta2);
+ 

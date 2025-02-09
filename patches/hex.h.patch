@@ -1,0 +1,12 @@
+diff --git a/include/hex.h b/include/hex.h
+index 2b77d88..f7ed86b 100644
+--- a/include/hex.h
++++ b/include/hex.h
+@@ -27,6 +27,7 @@
+ #include <string.h>				/* string processing          */
+ #include <strings.h>				/* string processing          */
+ #include <unistd.h>				/* unix std routines          */
++#include <stdbool.h>
+ #if defined(HAVE_STDINT_H)
+     #include <stdint.h>
+ #endif
