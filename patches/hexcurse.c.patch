@@ -1,13 +1,22 @@
 diff --git a/src/hexcurse.c b/src/hexcurse.c
-index 9723c2f..4e8c8fa 100644
+index 9723c2f..090c924 100644
 --- a/src/hexcurse.c
 +++ b/src/hexcurse.c
-@@ -102,7 +102,7 @@ int main(int argc, char *argv[])			/* main program       */
-     printHex = TRUE;							/* address format     */
-     USE_EBCDIC = FALSE;							/*use ascii by default*/
-     TERM_COLORS = FALSE;                     /*don't use term defined colors by default */
--    FNUMBERS = FALSE;     /* keep old behaviour without function key numbers by default */
-+    FNUMBERS = TRUE;     /* keep old behaviour without function key numbers by default */
+@@ -24,6 +24,7 @@
+ \******************************************************************************/
  
- 							/* get cmd line args  */
-     len = parseArgs(argc, argv);
+ #include "hex.h"					/* custom header      */
++#include "zos.h"
+ 
+ /*#define DEBUG_LLIST*/
+ /*#define DEBUG_GOTO*/
+@@ -264,6 +265,9 @@ off_t parseArgs(int argc, char *argv[])
+     } else if (fpINfilename && strcmp(fpINfilename, "")) {
+         if ((fpIN = fopen(fpINfilename, "r")) == NULL)
+             exit_err("Could not open file");
++#ifdef __MVS__
++    __disableautocvt(fileno(fpIN));
++#endif
+     }
+ 
+     return ((fpIN != NULL) ? maxLoc(fpIN):0);		/* return file length */
